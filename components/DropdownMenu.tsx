@@ -1,7 +1,5 @@
 "use client";
 import { ChevronDown, LogOut } from "lucide-react";
-import * as React from "react";
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { NAV_ITEMS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,13 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 
-type Checked = DropdownMenuCheckboxItemProps["checked"];
-
 export default function DropdownMenuCheckboxes() {
-  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
-  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false);
-  const [showPanel, setShowPanel] = React.useState<Checked>(false);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

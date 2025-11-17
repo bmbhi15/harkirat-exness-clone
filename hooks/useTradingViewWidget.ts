@@ -3,15 +3,15 @@ import { useRef, useEffect } from "react";
 
 const useTradingViewWidget = (
   scriptURL: string,
-  config: Record<string, string>,
+  config: Record<string, any>,
   height = 600
 ) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (!containerRef.current) return;
 
-    containerRef.current.innerHTML = `<div className="tradingview-widget-container" height=${height}>
-      <div className="tradingview-widget-container__widget"></div>
+    containerRef.current.innerHTML = `<div class="tradingview-widget-container" height=${height}>
+      <div class="tradingview-widget-container__widget"></div>
     </div>`;
 
     if (containerRef.current.dataset.loaded) return;

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const NavigationMenu = () => {
   const path = usePathname();
   return (
-    <ul className="flex-col md:flex flex-row gap-8 text-xl">
+    <ul className="hidden md:flex md:flex-row gap-8 text-xl">
       {NAV_ITEMS.map((item) => (
         <li key={item.href}>
           <Link href={item.href} className={`hover:text-white transition`}>

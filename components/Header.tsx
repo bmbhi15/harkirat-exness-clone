@@ -1,8 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import NavigationMenu from "./NavigationMenu";
-import { NAV_ITEMS } from "@/lib/constants";
 import ProfileNavigation from "./ProfileNavigation";
+
 const Header = () => {
   return (
     <header className="header">

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function RootLayout({
   children,
@@ -7,78 +8,55 @@ export default function RootLayout({
 }>) {
   return (
     <main className="auth-layout">
-      <div className="auth-left-section">
-        <Image
-          className="auth-logo"
-          alt="Exness logo"
-          src="/assets/icons/logo.svg"
-          width={100}
-          height={100}
-        />
-        {children}
-      </div>
-      <div className="auth-right-section h-screen justify-between">
-        <div>
-          <div className="auth-blockquote w-4/5">
+      <section className="auth-left-section scrollbar-hide-default">
+        <Link href="/" className="auth-logo">
+          <Image
+            className="h-8 w-auto"
+            alt="Exness logo"
+            src="/assets/icons/logo.svg"
+            width={140}
+            height={32}
+          />
+        </Link>
+        <div className="pb-6 lg:pb-8 flex-1">{children}</div>
+      </section>
+      <section className="auth-right-section h-screen justify-between">
+        <div className="z-10 relative lg:mt-4 lg:mb-16">
+          <blockquote className="auth-blockquote">
             I'm so impressed by this Exness Clone. This might be the best out
             there !!!. All the features are very cool and production level
-          </div>
-          <div className="flex flex-row justify-between">
+          </blockquote>
+          <div className="flex flex-row justify-between items-center">
             <div>
-              <p className="auth-testimonial-author">-- Harkirat Singh.</p>
-              <p>Youtuber</p>
+              <cite className="auth-testimonial-author">
+                -- Harkirat Singh.
+              </cite>
+              <p className="max-md:text-xs text-gray-500">Youtuber</p>
             </div>
             <div className="flex flex-row space-y-2 mx-20">
-              <Image
-                alt="star"
-                width={24}
-                height={24}
-                src="/assets/icons/star.svg"
-              />
-              <Image
-                alt="star"
-                width={24}
-                height={24}
-                src="/assets/icons/star.svg"
-              />
-              <Image
-                alt="star"
-                width={24}
-                height={24}
-                src="/assets/icons/star.svg"
-              />
-              <Image
-                alt="star"
-                width={24}
-                height={24}
-                src="/assets/icons/star.svg"
-              />
-              <Image
-                alt="star"
-                width={24}
-                height={24}
-                src="/assets/icons/star.svg"
-              />
-              <Image
-                alt="star"
-                className="hidden"
-                width={24}
-                height={24}
-                src="/assets/icons/star.svg"
-              />
+              {[1, 2, 3, 4, 5].map((item) => (
+                <Image
+                  key={item}
+                  alt="star"
+                  width={20}
+                  height={20}
+                  src="/assets/icons/star.svg"
+                  className="w-5 h-5"
+                />
+              ))}
             </div>
           </div>
         </div>
-        <div className="auth-dashboard-preview relative">
+        <div className="relative flex-1">
           <Image
-            src="/assets/images/dashboard-preview.png"
+            src="/assets/images/dashboard.png"
             alt="dashboard-preview"
-            width={1200}
-            height={1500}
-            className="absolute"
+            width={1440}
+            height={1150}
+            className="auth-dashboard-preview absolute top-0"
           />
         </div>
-      </div>
+      </section>
     </main>
   );
 }

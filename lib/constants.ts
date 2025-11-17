@@ -337,3 +337,14 @@ export const WATCHLIST_TABLE_HEADER = [
   "Alert",
   "Action",
 ];
+
+// Widget URLs
+
+export const MARKET_OVERVIEW_WIDGET_URL =
+  "https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js";
+export const HEATMAP_WIDGET_URL =
+  "https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js";
+export const TOP_STORIES_WIDGET_URL =
+  "https://s3.tradingview.com/external-embedding/embed-widget-timeline.js";
+export const MARKET_DATA_WIDGET_URL =
+  "https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js";

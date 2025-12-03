@@ -21,25 +21,28 @@ const SelectField = ({
   return (
     <div className="space-y-4 mb-4">
       <Label className="form-label">{label}</Label>
-      <Select>
-        <SelectTrigger className="select-trigger">
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((item) => (
-            <Controller
-              name={name}
-              key={item.value}
-              control={control}
-              render={() => (
-                <SelectItem value={item.value} className="form-input">
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <Select value={field.value} onValueChange={field.onChange}>
+            <SelectTrigger className="select-trigger">
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((item) => (
+                <SelectItem
+                  key={item.label}
+                  value={item.value}
+                  className="form-input"
+                >
                   {item.label}
                 </SelectItem>
-              )}
-            />
-          ))}
-        </SelectContent>
-      </Select>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+      />
     </div>
   );
 };

@@ -394,6 +394,7 @@
   background-color: #141414 !important;
   border-radius: 8px !important;
   overflow: hidden !important;
+  height: 600;
 }
 
 .tv-embed-widget-wrapper__body {
@@ -403,6 +404,8 @@
 .tradingview-widget-container__widget {
   background-color: #141414 !important;
   height: 100% !important;
+  /* border: #93c5fd;
+  border-width: 10px; */
 }
 
 .widget-stock-heatmap-container .screenerMapWrapper-BBVfGP0b {

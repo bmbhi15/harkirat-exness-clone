@@ -1,6 +1,33 @@
-import { createAuthClient } from "better-auth/react"; // make sure to import from better-auth/react
+import { betterAuth } from "better-auth"; // make sure to import from better-auth/react
 import { nextCookies } from "better-auth/next-js";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { dbConnect } from "../dbConnect";
 
-export const authClient = createAuthClient({
-  plugins: [nextCookies()],
-});
+let authInstance: ReturnType<typeof betterAuth> | null = null;
+
+export const getAuth = async () => {
+  if (authInstance) return authInstance;
+
+  const mongoose = await dbConnect();
+  const db = mongoose.connection.db;
+
+  if (!db) throw new Error("MongoDB connection not found");
+
+  authInstance = betterAuth({
+    appName: "Exness clone",
+    baseURL: process.env.BETTER_AUTH_URL,
+    database: mongodbAdapter(db as any),
+    emailAndPassword: {
+      enabled: true,
+      disableSignUp: false,
+      requireEmailVerification: true,
+      minPasswordLength: 8,
+      maxPasswordLength: 128,
+      autoSignIn: true,
+    },
+    plugins: [nextCookies()],
+  });
+  return authInstance;
+};
+
+export const auth = await getAuth();

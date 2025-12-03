@@ -98,7 +98,7 @@ export default function SignUp() {
           />
           <SelectField
             name="riskTolerance"
-            label="riskTolerance"
+            label="Risk Tolerance"
             placeholder="Select your risk tolerance"
             control={control}
             required={true}

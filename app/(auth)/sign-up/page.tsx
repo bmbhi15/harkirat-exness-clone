@@ -10,6 +10,7 @@ import {
   PREFERRED_INDUSTRIES,
   RISK_TOLERANCE_OPTIONS,
 } from "@/lib/constants";
+import { signupWithEmail } from "@/lib/actions/auth.actions";
 
 export default function SignUp() {
   const {
@@ -29,8 +30,14 @@ export default function SignUp() {
       preferredIndustry: "",
     },
   });
-  const onSubmit: SubmitHandler<SignUpFormData> = (data) =>
-    console.log("form submitted", data);
+  const onSubmit: SubmitHandler<SignUpFormData> = async (data) => {
+    try {
+      const res = await signupWithEmail(data);
+      console.log("user created successfully !!");
+    } catch (error) {
+      console.log("Failed to create user !!");
+    }
+  };
 
   return (
     <div className="h-full mt-10  2xl:mx-10">

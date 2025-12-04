@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SignInFormData } from "@/types/global";
 import InputField from "@/components/form/InputField";
-
+import { deleteUser } from "@/lib/actions/auth.actions";
 export default function LogIn() {
   const {
     register,
@@ -18,8 +18,14 @@ export default function LogIn() {
       password: "",
     },
   });
-  const onSubmit: SubmitHandler<SignInFormData> = (data) =>
-    console.log("form submitted", data);
+  const onSubmit: SubmitHandler<SignInFormData> = async (data) => {
+    try {
+      const res = await deleteUser();
+      console.log("user deleted !!");
+    } catch (error) {
+      console.log("Failed to delete !!");
+    }
+  };
 
   return (
     <div className="h-full mt-10  2xl:mx-10">

@@ -1,4 +1,6 @@
 "use client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -10,8 +12,10 @@ import {
   PREFERRED_INDUSTRIES,
   RISK_TOLERANCE_OPTIONS,
 } from "@/lib/constants";
+import { signupWithEmail } from "@/lib/actions/auth.actions";
 
 export default function SignUp() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -29,8 +33,24 @@ export default function SignUp() {
       preferredIndustry: "",
     },
   });
-  const onSubmit: SubmitHandler<SignUpFormData> = (data) =>
-    console.log("form submitted", data);
+  const onSubmit: SubmitHandler<SignUpFormData> = async (
+    data: SignUpFormData
+  ) => {
+    try {
+      const result = await signupWithEmail(data);
+      if (result && result.success) {
+        toast.success("Sign up successfull");
+
+        router.push("/");
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error("Sign up failed", {
+        description:
+          e instanceof Error ? e.message : "Failed to create an account.",
+      });
+    }
+  };
 
   return (
     <div className="h-full mt-10  2xl:mx-10">
@@ -91,7 +111,7 @@ export default function SignUp() {
           />
           <SelectField
             name="riskTolerance"
-            label="riskTolerance"
+            label="Risk Tolerance"
             placeholder="Select your risk tolerance"
             control={control}
             required={true}

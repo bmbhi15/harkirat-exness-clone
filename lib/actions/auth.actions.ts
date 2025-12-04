@@ -5,6 +5,7 @@ import { inngest } from "@/lib/inngest/client";
 import { SignUpFormData } from "@/types/global";
 import { auth } from "@/lib/better-auth/auth-client";
 import { headers } from "next/headers";
+import { success } from "better-auth";
 
 export async function signupWithEmail(formData: SignUpFormData) {
   try {
@@ -20,6 +21,7 @@ export async function signupWithEmail(formData: SignUpFormData) {
       name: "user/created",
       data: formData,
     });
+    return { success: true, data: response };
   } catch (error) {
     console.log("failed to create user !!");
     console.log(error);

@@ -1,4 +1,6 @@
 "use client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -13,6 +15,7 @@ import {
 import { signupWithEmail } from "@/lib/actions/auth.actions";
 
 export default function SignUp() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -30,12 +33,22 @@ export default function SignUp() {
       preferredIndustry: "",
     },
   });
-  const onSubmit: SubmitHandler<SignUpFormData> = async (data) => {
+  const onSubmit: SubmitHandler<SignUpFormData> = async (
+    data: SignUpFormData
+  ) => {
     try {
-      const res = await signupWithEmail(data);
-      console.log("user created successfully !!");
-    } catch (error) {
-      console.log("Failed to create user !!");
+      const result = await signupWithEmail(data);
+      if (result && result.success) {
+        toast.success("Sign up successfull");
+
+        router.push("/");
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error("Sign up failed", {
+        description:
+          e instanceof Error ? e.message : "Failed to create an account.",
+      });
     }
   };
 

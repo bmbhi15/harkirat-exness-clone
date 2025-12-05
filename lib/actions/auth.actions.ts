@@ -1,9 +1,9 @@
 "use server";
-
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { inngest } from "@/lib/inngest/client";
-import { SignUpFormData } from "@/types/global";
-import { auth } from "@/lib/better-auth/auth-client";
+import { SignUpFormData, SignInFormData } from "@/types/global";
+import { auth } from "@/lib/better-auth/auth";
 import { headers } from "next/headers";
 import { success } from "better-auth";
 
@@ -26,6 +26,46 @@ export async function signupWithEmail(formData: SignUpFormData) {
     console.log("failed to create user !!");
     console.log(error);
   }
+}
+export async function signInWithEmail({ email, password }: SignInFormData) {
+  try {
+    const response = await auth.api.signInEmail({
+      body: {
+        email,
+        password,
+      },
+      headers: await headers(),
+    });
+    console.log(response);
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to Sign In", error);
+  }
+}
+
+export async function signOut() {
+  try {
+    const response = await auth.api.signOut({
+      headers: await headers(),
+    });
+    console.log(response);
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to sign out", error);
+  }
+}
+
+export async function getServerSession() {
+  const cookie = await cookies();
+  const cookieHeader = await cookie.toString();
+  const res = await fetch(`${process.env.BETTER_AUTH_URL}/get-session`, {
+    headers: { Cookie: cookieHeader },
+    credentials: "include",
+  });
+  console.log("response from session");
+  console.log(res);
+  if (!res.ok) return null;
+  return await res.json();
 }
 // export async function deleteUser() {
 //   console.log("inside user delete function");

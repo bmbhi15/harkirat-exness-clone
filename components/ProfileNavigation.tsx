@@ -1,7 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import DropdownMenu from "./DropdownMenu";
+import DropdownMenuCheckboxes from "./DropdownMenu";
+import { auth } from "@/lib/better-auth/auth";
+import { headers } from "next/headers";
 
-const ProfileNavigation = () => {
+type ProfileNavigationProps = {
+  userName: string;
+};
+const ProfileNavigation = ({ userName }: ProfileNavigationProps) => {
   return (
     <div className="flex flex-row space-x-4">
       <Avatar>
@@ -9,9 +14,9 @@ const ProfileNavigation = () => {
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <p className="hidden md:flex items-center align-bottom text-white">
-        Harkirat Singh
+        {userName}
       </p>
-      <DropdownMenu />
+      <DropdownMenuCheckboxes userName={userName} />
     </div>
   );
 };

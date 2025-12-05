@@ -6,13 +6,13 @@ import { useEffect, useRef, memo } from "react";
 interface TradingViewWidgetProps {
   scriptURL: string;
   config: Record<string, any>;
-  height: number;
+  height: string;
   title: string;
 }
 function TradingViewWidget({
   scriptURL,
   config,
-  height = 600,
+  height = "600px",
   title,
 }: TradingViewWidgetProps) {
   const containerRef = useTradingViewWidget(scriptURL, config, height);

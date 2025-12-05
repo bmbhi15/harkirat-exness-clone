@@ -6,9 +6,6 @@ export const sendUserSignUpEmail = inngest.createFunction(
   { id: "user-signup-email" },
   { event: "user/created" },
   async ({ event, step }) => {
-    console.log("event data");
-    console.log(event.data);
-
     const USER_PROFILE = ` UserName: ${event.data.fullName}
     Investment Goals: ${event.data.investmentGoals},
   Preferred Industry: ${event.data.preferredIndustry},
@@ -38,8 +35,6 @@ export const sendUserSignUpEmail = inngest.createFunction(
         mainContent
       );
     });
-    console.log("Send email successfully !!");
-    console.log(res);
     return res;
   }
 );

@@ -2,19 +2,24 @@ import Header from "@/components/Header";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/better-auth/auth";
 import { headers } from "next/headers";
-import { authClient } from "@/lib/better-auth/auth-client";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = authClient.getSession();
-  if (!session) {
-    redirect("/log-in");
-  }
+  // if (!session || session.error) {
+  //   console.log("user session");
+  //   console.log(session);
+  //   redirect("/log-in");
+  // }
+  // console.log("user session");
+  // console.log(session);
 
-  const userName = session.;
+  // const userName = session.data?.user.name;
+  const userName = "Anagh Pranshu";
+  console.log(userName);
+  if (!userName) return;
   return (
     <main>
       <Header userName={userName} />

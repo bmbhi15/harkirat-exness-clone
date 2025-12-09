@@ -4,7 +4,7 @@ import { auth } from "@/lib/better-auth/auth";
 import { headers } from "next/headers";
 
 type ProfileNavigationProps = {
-  userName: string;
+  userName: string | null;
 };
 const ProfileNavigation = ({ userName }: ProfileNavigationProps) => {
   return (

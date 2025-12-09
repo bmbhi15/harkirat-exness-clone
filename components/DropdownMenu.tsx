@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 type DropdownMenuCheckboxesProps = {
-  userName: string;
+  userName: string | null;
 };
 export default function DropdownMenuCheckboxes({
   userName,

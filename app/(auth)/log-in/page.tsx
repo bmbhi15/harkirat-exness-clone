@@ -6,9 +6,16 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SignInFormData } from "@/types/global";
 import InputField from "@/components/form/InputField";
-import { signInWithEmail } from "@/lib/actions/auth.actions";
+import { getServerSession, signInWithEmail } from "@/lib/actions/auth.actions";
 
 export default function LogIn() {
+  // const {
+  //   data: session,
+  //   isPending, //loading state
+  //   error, //error object
+  //   refetch, //refetch the session
+  // } = authClient.useSession();
+
   const router = useRouter();
   const {
     register,
@@ -24,14 +31,7 @@ export default function LogIn() {
   });
   const onSubmit: SubmitHandler<SignInFormData> = async (data) => {
     try {
-      const result = await signInWithEmail(data);
-      if (result && result.success) {
-        toast.success("Sign up successfull");
-
-        router.push("/");
-      }
-      console.log(result);
-      console.log("User signed in to dashboard");
+      console.log("Tried signing in on the client and the results are -");
     } catch (error) {
       console.error("Failed to sign in user !!", error);
     }

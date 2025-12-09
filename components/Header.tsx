@@ -3,7 +3,7 @@ import NavigationMenu from "./NavigationMenu";
 import ProfileNavigation from "./ProfileNavigation";
 
 type HeaderProps = {
-  userName: string;
+  userName: string | null;
 };
 const Header = ({ userName }: HeaderProps) => {
   return (

@@ -27,7 +27,12 @@ export const sendUserSignUpEmail = inngest.createFunction(
         ],
       },
     });
-    const mainContent = response.candidates[0].content.parts[0].text;
+    if (!response.candidates || !response.candidates.length) return;
+    const firstPart = response.candidates[0].content.parts[0];
+    const mainContent = "text" in firstPart ? firstPart.text : "";
+
+    // If mainContent is empty or null, you might want to stop here
+    if (!mainContent) return;
     const res = await step.run("send-welcome-email", async () => {
       return sendEmailNodemailer(
         event.data.fullName,

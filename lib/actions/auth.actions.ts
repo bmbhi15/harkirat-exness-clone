@@ -56,16 +56,13 @@ export async function signOut() {
 }
 
 export async function getServerSession() {
-  const cookie = await cookies();
-  const cookieHeader = await cookie.toString();
-  const res = await fetch(`${process.env.BETTER_AUTH_URL}/get-session`, {
-    headers: { Cookie: cookieHeader },
-    credentials: "include",
+  const res = await auth.api.getSession({
+    headers: await headers(), // some endpoints might require headers
   });
-  console.log("response from session");
+  console.log("res");
   console.log(res);
-  if (!res.ok) return null;
-  return await res.json();
+  if (!res) return null;
+  return await res;
 }
 // export async function deleteUser() {
 //   console.log("inside user delete function");

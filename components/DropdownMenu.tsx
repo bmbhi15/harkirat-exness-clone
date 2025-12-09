@@ -11,8 +11,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-
-export default function DropdownMenuCheckboxes() {
+type DropdownMenuCheckboxesProps = {
+  userName: string | null;
+};
+export default function DropdownMenuCheckboxes({
+  userName,
+}: DropdownMenuCheckboxesProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -21,7 +25,7 @@ export default function DropdownMenuCheckboxes() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Harkirat Singh</DropdownMenuLabel>
+        <DropdownMenuLabel>{userName}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {NAV_ITEMS.map((item) => (
           <DropdownMenuItem key={item.href} className="md:hidden">

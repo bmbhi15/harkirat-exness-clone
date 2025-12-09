@@ -6,9 +6,6 @@ export const sendUserSignUpEmail = inngest.createFunction(
   { id: "user-signup-email" },
   { event: "user/created" },
   async ({ event, step }) => {
-    console.log("event data");
-    console.log(event.data);
-
     const USER_PROFILE = ` UserName: ${event.data.fullName}
     Investment Goals: ${event.data.investmentGoals},
   Preferred Industry: ${event.data.preferredIndustry},
@@ -30,7 +27,12 @@ export const sendUserSignUpEmail = inngest.createFunction(
         ],
       },
     });
-    const mainContent = response.candidates[0].content.parts[0].text;
+    if (!response.candidates || !response.candidates.length) return;
+    const firstPart = response.candidates[0].content.parts[0];
+    const mainContent = "text" in firstPart ? firstPart.text : "";
+
+    // If mainContent is empty or null, you might want to stop here
+    if (!mainContent) return;
     const res = await step.run("send-welcome-email", async () => {
       return sendEmailNodemailer(
         event.data.fullName,
@@ -38,8 +40,6 @@ export const sendUserSignUpEmail = inngest.createFunction(
         mainContent
       );
     });
-    console.log("Send email successfully !!");
-    console.log(res);
     return res;
   }
 );

@@ -19,7 +19,7 @@ const Home = () => {
             <TradingViewWidget
               scriptURL={MARKET_OVERVIEW_WIDGET_URL}
               config={MARKET_OVERVIEW_WIDGET_CONFIG}
-              height={600}
+              height="600px"
               title="Market Overview"
             />
           </div>
@@ -27,7 +27,7 @@ const Home = () => {
             <TradingViewWidget
               scriptURL={HEATMAP_WIDGET_URL}
               config={HEATMAP_WIDGET_CONFIG}
-              height={600}
+              height="600px"
               title="Most Popular Stocks"
             />
           </div>
@@ -35,7 +35,7 @@ const Home = () => {
             <TradingViewWidget
               scriptURL={TOP_STORIES_WIDGET_URL}
               config={TOP_STORIES_WIDGET_CONFIG}
-              height={600}
+              height="600px"
               title="Top Stories"
             />
           </div>
@@ -43,7 +43,7 @@ const Home = () => {
             <TradingViewWidget
               scriptURL={MARKET_DATA_WIDGET_URL}
               config={MARKET_DATA_WIDGET_CONFIG}
-              height={600}
+              height="600px"
               title="Market Data"
             />
           </div>

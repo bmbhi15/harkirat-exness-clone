@@ -3,6 +3,7 @@ import { nextCookies } from "better-auth/next-js";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { dbConnect } from "../dbConnect";
 import { admin } from "better-auth/plugins";
+import { Types } from "mongoose";
 
 let authInstance: ReturnType<typeof betterAuth> | null = null;
 
@@ -21,7 +22,7 @@ export const getAuth = async () => {
     emailAndPassword: {
       enabled: true,
       disableSignUp: false,
-      requireEmailVerification: true,
+      requireEmailVerification: false,
       minPasswordLength: 8,
       maxPasswordLength: 128,
       autoSignIn: true,
@@ -29,6 +30,13 @@ export const getAuth = async () => {
     user: {
       deleteUser: {
         enabled: true,
+      },
+    },
+    advanced: {
+      database: {
+        generateId() {
+          return new Types.ObjectId().toString();
+        },
       },
     },
     plugins: [nextCookies(), admin()],

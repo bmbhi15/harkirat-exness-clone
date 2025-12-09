@@ -1,11 +1,22 @@
 "use client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SignInFormData } from "@/types/global";
 import InputField from "@/components/form/InputField";
-import { deleteUser } from "@/lib/actions/auth.actions";
+import { getServerSession, signInWithEmail } from "@/lib/actions/auth.actions";
+
 export default function LogIn() {
+  // const {
+  //   data: session,
+  //   isPending, //loading state
+  //   error, //error object
+  //   refetch, //refetch the session
+  // } = authClient.useSession();
+
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -20,10 +31,9 @@ export default function LogIn() {
   });
   const onSubmit: SubmitHandler<SignInFormData> = async (data) => {
     try {
-      const res = await deleteUser();
-      console.log("user deleted !!");
+      console.log("Tried signing in on the client and the results are -");
     } catch (error) {
-      console.log("Failed to delete !!");
+      console.error("Failed to sign in user !!", error);
     }
   };
 

@@ -2,7 +2,10 @@ import Image from "next/image";
 import NavigationMenu from "./NavigationMenu";
 import ProfileNavigation from "./ProfileNavigation";
 
-const Header = () => {
+type HeaderProps = {
+  userName: string | null;
+};
+const Header = ({ userName }: HeaderProps) => {
   return (
     <header className="header">
       <nav className="header-wrapper container">
@@ -16,7 +19,7 @@ const Header = () => {
         <div className="hidden md:block">
           <NavigationMenu />
         </div>
-        <ProfileNavigation />
+        <ProfileNavigation userName={userName} />
       </nav>
     </header>
   );

@@ -23,7 +23,6 @@ export async function signupWithEmail(formData: SignUpFormData) {
     });
     return { success: true, data: response };
   } catch (error) {
-    console.log("failed to create user !!");
     console.log(error);
   }
 }
@@ -36,7 +35,6 @@ export async function signInWithEmail({ email, password }: SignInFormData) {
       },
       headers: await headers(),
     });
-    console.log(response);
     return { success: true };
   } catch (error) {
     console.error("Failed to Sign In", error);
@@ -48,7 +46,6 @@ export async function signOut() {
     const response = await auth.api.signOut({
       headers: await headers(),
     });
-    console.log(response);
     return { success: true };
   } catch (error) {
     console.error("Failed to sign out", error);
@@ -59,8 +56,6 @@ export async function getServerSession() {
   const res = await auth.api.getSession({
     headers: await headers(), // some endpoints might require headers
   });
-  console.log("res");
-  console.log(res);
   if (!res) return null;
   return await res;
 }

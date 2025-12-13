@@ -8,17 +8,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // if (!session || session.error) {
-  //   console.log("user session");
-  //   console.log(session);
-  //   redirect("/log-in");
-  // }
-  // console.log("user session");
-  // console.log(session);
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) {
+    redirect("/log-in");
+  }
 
-  // const userName = session.data?.user.name;
-  const userName = "Anagh Pranshu";
-  console.log(userName);
+  const userName = session.user.name;
   if (!userName) return;
   return (
     <main>

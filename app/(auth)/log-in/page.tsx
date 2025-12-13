@@ -1,12 +1,12 @@
 "use client";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SignInFormData } from "@/types/global";
 import InputField from "@/components/form/InputField";
-import { getServerSession, signInWithEmail } from "@/lib/actions/auth.actions";
+import { signIn } from "@/lib/better-auth/auth-client";
+import { toast } from "sonner";
 
 export default function LogIn() {
   // const {
@@ -31,7 +31,18 @@ export default function LogIn() {
   });
   const onSubmit: SubmitHandler<SignInFormData> = async (data) => {
     try {
-      console.log("Tried signing in on the client and the results are -");
+      await signIn.email(
+        { email: data.email, password: data.password },
+        {
+          onSuccess(context) {
+            toast.success("Successfully signed in");
+            router.push("/");
+          },
+          onError(context) {
+            toast.error(context.error.message);
+          },
+        }
+      );
     } catch (error) {
       console.error("Failed to sign in user !!", error);
     }

@@ -39,8 +39,6 @@ export default function SignUp() {
     try {
       const result = await signupWithEmail(data);
       if (result && result.success) {
-        console.log("Result after successfull sign up");
-        console.log(result);
         toast.success("Sign up successfull");
 
         router.push("/");
